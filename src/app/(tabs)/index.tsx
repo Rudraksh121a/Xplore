@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
-import CardList from "@/components/core/CustomTrandingCard";
+import CardList from "@/components/core/CustomImageTextCard";
 import { Ionicons } from "@expo/vector-icons";
 import FeaturesCard from "@/components/core/featruesCard";
 
