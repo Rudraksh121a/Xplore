@@ -10,14 +10,16 @@
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.3.0",
+    "@expo/vector-icons": "^14.0.4",
+    "@react-native-picker/picker": "^2.11.0",
     "expo": "~52.0.42",
     "expo-font": "^13.0.4",
+    "expo-linear-gradient": "~14.0.2",
     "expo-router": "^4.0.20",
     "expo-splash-screen": "^0.29.22",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
-    "react-native": "0.76.8",
-    "expo-linear-gradient": "~14.0.2"
+    "react-native": "0.76.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -11,15 +11,15 @@ export default function TabLayout() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Tabs
           screenOptions={{
-            tabBarActiveTintColor: "#007AFF",
-            tabBarInactiveTintColor: "#8E8E93",
+            tabBarActiveTintColor: "#007AFF",  // Main Premium Blue
+            tabBarInactiveTintColor: "#8E8E93", // Soft Grey for Inactive Tabs
             tabBarStyle: {
-              backgroundColor: "#F8F8F8",
+              backgroundColor: "#F4F8FB", // Light Premium Background
               borderTopWidth: 0,
               elevation: 5,
-              height: 60,
-              paddingBottom: 8,
-              paddingTop: 8,
+              height: 65, // More space for better touch experience
+              paddingBottom: 10,
+              paddingTop: 10,
             },
             headerShown: false,
             tabBarHideOnKeyboard: true, 
@@ -39,8 +39,8 @@ export default function TabLayout() {
             options={{
               title: "Explore",
               tabBarIcon: ({ color }) => (
-                <Feather name="search" size={26} color={color} />
-              ),
+                <Ionicons name="airplane-outline" size={26} color={color} />
+              ), // Airplane better represents trip planning
             }}
           />
           <Tabs.Screen
@@ -55,7 +55,7 @@ export default function TabLayout() {
           <Tabs.Screen
             name="chatbot"
             options={{
-              title: "Chat",
+              title: "Xplora AI",
               tabBarIcon: ({ color }) => (
                 <Ionicons
                   name="chatbubble-ellipses-outline"

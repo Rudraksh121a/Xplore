@@ -7,6 +7,8 @@ import FeaturesCard from "@/components/core/featruesCard";
 const weekendTours = [
   { name: "Goa Beach Weekend", image: { uri: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/goa.jpg?w=2400&h=-1&s=1" } },
   { name: "Himalayan Adventure", image: { uri: "https://picsum.photos/id/238/200/300" } },
+  { name: "Goa Beach Weekend", image: { uri: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/goa.jpg?w=2400&h=-1&s=1" } },
+  { name: "Himalayan Adventure", image: { uri: "https://picsum.photos/id/238/200/300" } },
 ];
 
 const popularDestinations = [
@@ -55,6 +57,7 @@ export default function HomeScreen() {
       </View>
 
       {/* Travel Sections */}
+      
       <CardList title="Weekend Tours" data={weekendTours} />
       <CardList title="Popular Destinations" data={popularDestinations} />
       <CardList title="Top Choice" data={topChoices} />
@@ -67,13 +70,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F4F8FB", 
-    padding: 20,
+    // padding: 20,
+    // paddingHorizontal: 16,
+    paddingVertical: 20,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
+    paddingHorizontal: 16,
   },
   logo: {
     fontSize: 28,
@@ -85,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#ffffff",
     borderRadius: 10,
-    paddingHorizontal: 12,
+    paddingHorizontal: 16,
     elevation: 3,
     flex: 1,
     marginLeft: 12,
@@ -93,6 +99,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
+    
   },
   searchIcon: {
     marginRight: 6,
@@ -104,7 +111,8 @@ const styles = StyleSheet.create({
     color: "#2C3E50", 
   },
   featuresContainer: {
-    marginBottom: 20,
+    // marginBottom: 20,
+    marginHorizontal: 16,
   },
   exploreButton: {
     backgroundColor: "#FF6F61", 

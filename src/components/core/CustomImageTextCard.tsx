@@ -10,6 +10,7 @@ const CardList = ({ title, data }: CardListProps) => {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{title}</Text>
+      <View style={styles.cardContainer}>
       <FlatList
         data={data}
         horizontal
@@ -17,11 +18,13 @@ const CardList = ({ title, data }: CardListProps) => {
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
+
             <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardText}>{item.name}</Text>
           </View>
         )}
       />
+      </View>
     </View>
   );
 };
@@ -29,14 +32,15 @@ const CardList = ({ title, data }: CardListProps) => {
 const styles = StyleSheet.create({
   section: {
     marginBottom: 25,
-    paddingHorizontal: 12,
+    
   },
   sectionTitle: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#007AFF", // Main Xplore Blue
+    color: "#007AFF",
     marginBottom: 12,
     textTransform: "capitalize",
+    marginHorizontal: 16,
   },
   card: {
     backgroundColor: "#ffffff",
@@ -49,6 +53,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
+    marginLeft:16
   },
   cardImage: {
     width: 140,
@@ -63,6 +68,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textTransform: "capitalize",
   },
+  cardContainer:{
+    // marginHorizontal: 16,
+    
+  }
 });
 
 export default CardList;

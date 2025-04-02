@@ -1,28 +1,32 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import CustomImageTextInnerCard from "@/components/core/customImageTextInnerCard";
+import React from "react";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-const { width } = Dimensions.get("window");
+const tools = [
+  { id: "1", name: "Upload Documents", icon: "document-text-outline" },
+  { id: "2", name: "Language Translator", icon: "globe-outline" },
+  { id: "3", name: "Currency Converter", icon: "cash-outline" },
+  { id: "4", name: "Weather Updates", icon: "partly-sunny-outline" },
+  { id: "5", name: "Car/Bike Rentals", icon: "car-outline" },
+  { id: "6", name: "Hotel & Flight Booking", icon: "airplane-outline" },
+];
 
 export default function FavoritesScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.gridContainer}>
-        <View style={styles.cardContainer}>
-          <CustomImageTextInnerCard title="Virtual Documents" />
-        </View>
-        <View style={styles.cardContainer}>
-          <CustomImageTextInnerCard title="Currency Converter" />
-        </View>
-        <View style={styles.cardContainer}>
-          <CustomImageTextInnerCard title="Weather Updates" />
-        </View>
-        <View style={styles.cardContainer}>
-          <CustomImageTextInnerCard title="Hotel Booking" />
-        </View>
-        <View style={styles.cardContainer}>
-          <CustomImageTextInnerCard title="Hotel Booking" />
-        </View>
-      </View>
+      <Text style={styles.header}>Virtual Travel Tools</Text>
+
+      {/* Tools List */}
+      <FlatList
+        data={tools}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.toolCard}>
+            <Ionicons name={item.icon as any} size={28} color="#FFC107" />
+            <Text style={styles.toolText}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 }
@@ -30,29 +34,32 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F4F8FB",
+    backgroundColor: "#F4F8FB", // Soft Light Blue
     padding: 20,
-    alignItems: "center",
   },
-  gridContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    width: "100%",
-  },
-  cardContainer: {
-    width: "48%",
-    backgroundColor: "#007AFF", 
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cardText: {
-    color: "#F4F8FB", 
-    fontSize: 16,
-    textAlign: "center",
+  header: {
+    fontSize: 24,
     fontWeight: "bold",
+    color: "#007AFF", // Explorer Blue
+    marginBottom: 15,
+  },
+  toolCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 12,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+  },
+  toolText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2C3E50", // Deep Navy
+    marginLeft: 10,
   },
 });
