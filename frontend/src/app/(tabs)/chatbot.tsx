@@ -1,31 +1,70 @@
-import React, { useState } from "react";
-import { 
-  View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, 
-  KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback 
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import axios from "axios";
+
+
+
 
 export default function Chatbot() {
+  const url = "http://192.168.197.77:8000/chatbot/?message=hello";
+  ; // Replace with actual IP
+
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(url);
+      console.warn(response.data); // ✅ Now logs actual data
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []); // Runs onc
   const [messages, setMessages] = useState([
-    { id: "1", text: "Hello! 👋 How can I assist you with your trip?", sender: "bot" },
+    {
+      id: "1",
+      text: "Hello! 👋 How can I assist you with your trip?",
+      sender: "bot",
+    },
   ]);
   const [input, setInput] = useState("");
 
   const sendMessage = () => {
     if (input.trim()) {
-      setMessages([...messages, { id: Date.now().toString(), text: input, sender: "user" }]);
+      setMessages([
+        ...messages,
+        { id: Date.now().toString(), text: input, sender: "user" },
+      ]);
       setInput("");
       setTimeout(() => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          { id: Date.now().toString(), text: "I'm here to help! 😊", sender: "bot" },
+          {
+            id: Date.now().toString(),
+            text: "I'm here to help! 😊",
+            sender: "bot",
+          },
         ]);
       }, 1000);
     }
   };
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.flexContainer}
     >
@@ -39,7 +78,14 @@ export default function Chatbot() {
             data={messages}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <View style={[styles.messageContainer, item.sender === "user" ? styles.userMessage : styles.botMessage]}>
+              <View
+                style={[
+                  styles.messageContainer,
+                  item.sender === "user"
+                    ? styles.userMessage
+                    : styles.botMessage,
+                ]}
+              >
                 <Text style={styles.messageText}>{item.text}</Text>
               </View>
             )}
@@ -114,7 +160,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    paddingVertical: 8, 
+    paddingVertical: 8,
     marginBottom: Platform.OS === "ios" ? 10 : 5,
   },
   input: {

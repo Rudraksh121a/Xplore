@@ -9,6 +9,7 @@ const tools = [
   { id: "4", name: "Weather Updates", icon: "partly-sunny-outline" },
   { id: "5", name: "Car/Bike Rentals", icon: "car-outline" },
   { id: "6", name: "Hotel & Flight Booking", icon: "airplane-outline" },
+  { id: "7", name: "Emergency Contacts", icon: "alert-circle-outline" },
 ];
 
 export default function FavoritesScreen() {

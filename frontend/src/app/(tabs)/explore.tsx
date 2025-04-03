@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+    import { Link } from "expo-router";
 
 const trips = [
   { id: "1", title: "My Goa Adventure 🌊", date: "April 10 - April 15" },
@@ -8,6 +10,8 @@ const trips = [
 ];
 
 export default function ExploreScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Plan Your Trip</Text>
@@ -26,10 +30,12 @@ export default function ExploreScreen() {
       />
 
       {/* Create New Trip Button */}
-      <TouchableOpacity style={styles.createButton}>
+      <Link href="/NewTripScreen" asChild>
+      <TouchableOpacity style={styles.createButton} >
         <Ionicons name="add-circle-outline" size={24} color="#fff" />
         <Text style={styles.createButtonText}>Create New Trip</Text>
       </TouchableOpacity>
+      </Link>
     </View>
   );
 }
@@ -37,13 +43,13 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F4F8FB", // Soft Light Blue
+    backgroundColor: "#F4F8FB",
     padding: 20,
   },
   header: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#007AFF", // Main Explorer Blue
+    color: "#007AFF",
     marginBottom: 15,
   },
   card: {
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#2C3E50", // Deep Navy
+    color: "#2C3E50",
   },
   cardDate: {
     fontSize: 14,
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
   },
   createButton: {
     flexDirection: "row",
-    backgroundColor: "#FF6F61", // Energetic Coral
+    backgroundColor: "#FF6F61",
     padding: 15,
     borderRadius: 10,
     justifyContent: "center",
