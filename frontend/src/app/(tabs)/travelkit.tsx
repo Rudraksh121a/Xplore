@@ -12,7 +12,7 @@ const tools = [
   { id: "7", name: "Emergency Contacts", icon: "alert-circle-outline" },
   { id: "8", name: "Map", icon: "map-outline" },
   { id: "9", name: "Travel Insurance", icon: "shield-checkmark-outline" },
-  { id: "10", name: "packing idea for travel", icon: "shield-checkmark-outline" },
+  { id: "10", name: "Packing Ideas", icon: "briefcase-outline" }, // Changed icon for uniqueness
 ];
 
 export default function FavoritesScreen() {
@@ -22,6 +22,7 @@ export default function FavoritesScreen() {
 
       {/* Tools List */}
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={tools}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -30,6 +31,7 @@ export default function FavoritesScreen() {
             <Text style={styles.toolText}>{item.name}</Text>
           </TouchableOpacity>
         )}
+        contentContainerStyle={styles.listContainer} // Added spacing
       />
     </View>
   );
@@ -38,14 +40,18 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F4F8FB", // Soft Light Blue
+    backgroundColor: "#F4F8FB",
     padding: 20,
   },
   header: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#007AFF", // Explorer Blue
+    color: "#007AFF",
     marginBottom: 15,
+    textAlign: "center",
+  },
+  listContainer: {
+    paddingBottom: 20,
   },
   toolCard: {
     flexDirection: "row",
@@ -54,16 +60,17 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 12,
     marginBottom: 12,
-    elevation: 5,
+    elevation: 4,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   toolText: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#2C3E50", // Deep Navy
-    marginLeft: 10,
+    fontWeight: "500",
+    color: "#2C3E50",
+    marginLeft: 12,
   },
 });
+
