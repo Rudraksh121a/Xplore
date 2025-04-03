@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
-import CardList from "@/components/core/CustomImageTextCard";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import CardList from "@/components/core/CustomImageTextCard";
 import FeaturesCard from "@/components/core/featruesCard";
+import { LinearGradient } from "expo-linear-gradient";
 
 const weekendTours = [
-  { name: "Goa Beach Weekend", image: { uri: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/goa.jpg?w=2400&h=-1&s=1" } },
-  { name: "Himalayan Adventure", image: { uri: "https://picsum.photos/id/238/200/300" } },
   { name: "Goa Beach Weekend", image: { uri: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/goa.jpg?w=2400&h=-1&s=1" } },
   { name: "Himalayan Adventure", image: { uri: "https://picsum.photos/id/238/200/300" } },
 ];
@@ -23,7 +23,7 @@ const topChoices = [
 
 const aboutFeatures = [
   "🔍 AI-Powered Tour Recommendations",
-  "📅 Dynamic AI Itineraries & Weather Adjustments",
+  "📅 Dynamic AI Itineraries & Weather Adjustments", 
   "🗺️ AR Landmark Recognition & Walking Directions",
   "🤖 AI Chatbot for Travel Assistance",
   "💱 Real-Time Currency & Multi-Language Support",
@@ -33,35 +33,50 @@ export default function HomeScreen() {
   const [selectIndex, setSelectIndex] = useState(0);
 
   const handleLeftPress = () => {
-    if (selectIndex > 0) setSelectIndex(selectIndex - 1);
+    setSelectIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : aboutFeatures.length - 1));
   };
 
   const handleRightPress = () => {
-    if (selectIndex < aboutFeatures.length - 1) setSelectIndex(selectIndex + 1);
+    setSelectIndex((prevIndex) => (prevIndex < aboutFeatures.length - 1 ? prevIndex + 1 : 0));
   };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Header Section */}
-      <View style={styles.header}>
-        <Text style={styles.logo}>Xplore</Text>
-        <View style={styles.searchContainer}>
-          <Ionicons name="search-outline" size={20} color="#888" style={styles.searchIcon} />
-          <TextInput style={styles.searchBar} placeholder="Search destinations..." placeholderTextColor="#888" />
-        </View>
-      </View>
+      {/* Hero Section */}
+      <ImageBackground
+        source={{ uri: "https://picsum.photos/id/235/800/400" }}
+        style={styles.hero}
+      >
+        <LinearGradient
+          colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,0.7)']}
+          style={styles.heroOverlay}
+        >
+          <View style={styles.header}>
+            <Text style={styles.logo}>Xplore</Text>
+            <Link href="/screens/searchScreen/search" asChild>
+              <TouchableOpacity style={styles.searchButton}>
+                <Ionicons name="search-outline" size={22} color="#FFF" />
+                <Text style={styles.searchText}>Where to?</Text>
+              </TouchableOpacity>
+            </Link>
+          </View>
+          <Text style={styles.heroTitle}>Discover Your Next Adventure</Text>
+          <Text style={styles.heroSubtitle}>Explore the world with AI-powered travel companion</Text>
+        </LinearGradient>
+      </ImageBackground>
 
-      {/* Features Section */}
+      {/* Features Section - Premium Design */}
       <View style={styles.featuresContainer}>
+        <Text style={styles.sectionTitle}>Why Choose Xplore?</Text>
         <FeaturesCard title={aboutFeatures[selectIndex]} onLeftArrowPress={handleLeftPress} onRightArrowPress={handleRightPress} />
       </View>
 
       {/* Travel Sections */}
-      
-      <CardList title="Weekend Tours" data={weekendTours} />
-      <CardList title="Popular Destinations" data={popularDestinations} />
-      <CardList title="Top Choice" data={topChoices} />
-
+      <View style={styles.travelSection}>
+        <CardList title="Weekend Escapes" data={weekendTours} />
+        <CardList title="Trending Destinations" data={popularDestinations} />
+        <CardList title="Editor's Choice" data={topChoices} />
+      </View>
     </ScrollView>
   );
 }
@@ -69,67 +84,80 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F4F8FB", 
-    // padding: 20,
-    // paddingHorizontal: 16,
-    paddingVertical: 20,
+    backgroundColor: "#F4F8FB",
+  },
+  hero: {
+    height: 400,
+  },
+  heroOverlay: {
+    flex: 1,
+    padding: 20,
+    justifyContent: "space-between",
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
-    paddingHorizontal: 16,
+    marginTop: 40,
   },
   logo: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: "bold",
-    color: "#007AFF", 
+    color: "#FFF",
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
   },
-  searchContainer: {
+  searchButton: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#ffffff",
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    elevation: 3,
-    flex: 1,
-    marginLeft: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    
+    backgroundColor: "rgba(255,255,255,0.2)",
+    padding: 12,
+    borderRadius: 25,
+    gap: 8,
   },
-  searchIcon: {
-    marginRight: 6,
-  },
-  searchBar: {
-    flex: 1,
+  searchText: {
+    color: "#FFF",
     fontSize: 16,
-    paddingVertical: 10,
-    color: "#2C3E50", 
+  },
+  heroTitle: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#FFF",
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+  },
+  heroSubtitle: {
+    fontSize: 18,
+    color: "#FFF",
+    opacity: 0.9,
+    marginTop: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
   },
   featuresContainer: {
-    // marginBottom: 20,
-    marginHorizontal: 16,
+    margin: 16,
+    backgroundColor: "#FFF",
+    padding: 20,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 8,
   },
-  exploreButton: {
-    backgroundColor: "#FF6F61", 
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: "center",
-    marginTop: 20,
-    shadowColor: "#FF3B30", 
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  exploreButtonText: {
-    fontSize: 18,
+  sectionTitle: {
+    fontSize: 24,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#1A1A1A",
+    marginBottom: 16,
+    textAlign: "center",
   },
+  travelSection: {
+    paddingHorizontal: 16,
+    paddingBottom: 32,
+    gap: 24,
+  }
 });
-
