@@ -1,17 +1,22 @@
 import { Tabs } from "expo-router";
 import { Ionicons, Feather } from "@expo/vector-icons";
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 export default function TabLayout() {
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Tabs
           screenOptions={{
-            tabBarActiveTintColor: "#007AFF",  // Main Premium Blue
+            tabBarActiveTintColor: "#007AFF", // Main Premium Blue
             tabBarInactiveTintColor: "#8E8E93", // Soft Grey for Inactive Tabs
             tabBarStyle: {
               backgroundColor: "#F4F8FB", // Light Premium Background
@@ -22,7 +27,7 @@ export default function TabLayout() {
               paddingTop: 10,
             },
             headerShown: false,
-            tabBarHideOnKeyboard: true, 
+            tabBarHideOnKeyboard: true,
           }}
         >
           <Tabs.Screen
