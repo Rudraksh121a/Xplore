@@ -1,16 +1,10 @@
 import psycopg2
-from app.config import DBNAME, USER, PASSWORD, HOST, PORT
-
+import os
 def get_db_connection():
+    DATABASE_URL = os.getenv("DATABASE_URL")
     try:
-        conn = psycopg2.connect(
-            dbname=DBNAME,
-            user=USER,
-            password=PASSWORD,
-            host=HOST,
-            port=PORT
-        )
+        conn = psycopg2.connect(DATABASE_URL)
         return conn
     except Exception as e:
-        print(f"❌ Database connection error: {e}")
+        print(f"Database connection error: {e}")
         return None
