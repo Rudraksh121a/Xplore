@@ -1,5 +1,5 @@
 import psycopg2
-from config import DBNAME, USER, PASSWORD, HOST, PORT
+from app.config import DBNAME, USER, PASSWORD, HOST, PORT
 
 def get_db_connection():
     try:

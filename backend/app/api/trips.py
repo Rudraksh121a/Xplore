@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from database import get_db_connection
-from query import *
+from app.database import get_db_connection
+from app.query import *
 
 
 trip_api = Blueprint('trip_api', __name__)
